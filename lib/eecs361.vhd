@@ -184,4 +184,78 @@ package eecs361 is
 	  dout	: out std_logic_vector(31 downto 0)
 	);
   end component syncram;
+
+component dec_32
+  port (
+    src	: in std_logic_vector(4 downto 0);
+    z	: out std_logic_vector(31 downto 0)
+  );
+end component dec_32;
+
+component mux32_32
+  port (
+	in0	 : in  std_logic_vector(31 downto 0);
+	in1	 : in  std_logic_vector(31 downto 0);
+	in2	 : in  std_logic_vector(31 downto 0);
+	in3	 : in  std_logic_vector(31 downto 0);
+	in4	 : in  std_logic_vector(31 downto 0);
+	in5	 : in  std_logic_vector(31 downto 0);
+	in6	 : in  std_logic_vector(31 downto 0);
+	in7	 : in  std_logic_vector(31 downto 0);
+	in8	 : in  std_logic_vector(31 downto 0);
+	in9	 : in  std_logic_vector(31 downto 0);
+	in10	: in  std_logic_vector(31 downto 0);
+	in11	: in  std_logic_vector(31 downto 0);
+	in12	: in  std_logic_vector(31 downto 0);
+	in13	: in  std_logic_vector(31 downto 0);
+	in14	: in  std_logic_vector(31 downto 0);
+	in15	: in  std_logic_vector(31 downto 0);
+	in16	: in  std_logic_vector(31 downto 0);
+	in17	: in  std_logic_vector(31 downto 0);
+	in18	: in  std_logic_vector(31 downto 0);
+	in19	: in  std_logic_vector(31 downto 0);
+	in20	: in  std_logic_vector(31 downto 0);
+	in21	: in  std_logic_vector(31 downto 0);
+	in22	: in  std_logic_vector(31 downto 0);
+	in23	: in  std_logic_vector(31 downto 0);
+	in24	: in  std_logic_vector(31 downto 0);
+	in25	: in  std_logic_vector(31 downto 0);
+	in26	: in  std_logic_vector(31 downto 0);
+	in27	: in  std_logic_vector(31 downto 0);
+	in28	: in  std_logic_vector(31 downto 0);
+	in29	: in  std_logic_vector(31 downto 0);
+	in30	: in  std_logic_vector(31 downto 0);
+	in31	: in  std_logic_vector(31 downto 0);
+	
+	sel	: in  std_logic_vector(4 downto 0);
+	output	: out std_logic_vector(31 downto 0)
+  );
+end component mux32_32;  
+
+component mux_4input
+  port (
+	sel	  : in	std_logic_vector(1 downto 0);
+	src0  : in	std_logic_vector(31 downto 0);
+	src1  :	in	std_logic_vector(31 downto 0);
+	src2  :	in	std_logic_vector(31 downto 0);
+	src3  :	in	std_logic_vector(31 downto 0);
+	z	    : out std_logic_vector(31 downto 0)
+  );
+end component mux_4input;
+
+
+component register_file
+port
+(
+  outA          : out std_logic_vector(31 downto 0);
+  outB          : out std_logic_vector(31 downto 0);
+  input         : in  std_logic_vector(31 downto 0);
+  writeEnable   : in std_logic;
+  regASel       : in std_logic_vector(4 downto 0);
+  regBSel       : in std_logic_vector(4 downto 0);
+  writeRegSel   : in std_logic_vector(4 downto 0);
+  clock         : in std_logic
+  );
+end component register_file;
+
 end;
