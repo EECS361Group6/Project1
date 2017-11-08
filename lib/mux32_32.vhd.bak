@@ -5,7 +5,7 @@ use work.eecs361.all;
 
 entity mux32_32 is
   port (
-	in0	 : in  std_logic_vector(31 downto 0); --aaaa
+	in0	 : in  std_logic_vector(31 downto 0);
 	in1	 : in  std_logic_vector(31 downto 0);
 	in2	 : in  std_logic_vector(31 downto 0);
 	in3	 : in  std_logic_vector(31 downto 0);
