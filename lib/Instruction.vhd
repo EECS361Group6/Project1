@@ -22,7 +22,7 @@ signal sel0: std_logic;
 signal ins: std_logic_vector(31 downto 0);
 begin
 	instruction <= ins;
-	SignExt <= ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(0)&ins(15 downto 0)&"00";
+	SignExt <= ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15 downto 0)&"00";
 
 	and0: and_gate port map(x=>branch, y=>zero, z=>sel0);
 	m0: mux_32 port map(sel=>reset, src0=> Next_PC, src1=> x"00400020", z=>PC_in);
