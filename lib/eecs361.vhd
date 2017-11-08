@@ -7,6 +7,20 @@ use work.eecs361_gates.all;
 
 package eecs361 is
 
+  --decode
+  component decode
+	port(
+		ins: in std_logic_vector(31 downto 0);
+		regS: out std_logic_vector(4 downto 0);
+		regT: out std_logic_vector(4 downto 0);
+		regD: out std_logic_vector(4 downto 0);
+		imm: out std_logic_vector(31 downto 0);
+		opcode: out std_logic_vector(5 downto 0);
+		func: out std_logic_vector(5 downto 0);
+		shamt: out std_logic_vector(31 downto 0)	
+	);
+  end component decode;
+
   -- instruction
   component Instruction
 	port(
