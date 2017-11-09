@@ -32,6 +32,19 @@ port (
 );
 end component not_6;
 
+
+component or_6 
+port (
+	in0:in std_logic;
+	in1:in std_logic;
+	in2:in std_logic;
+	in3:in std_logic;
+	in4:in std_logic;
+	in5:in std_logic;
+	output:out std_logic
+);
+end component or_6;
+
   component not_gate_n
     generic (
       n : integer

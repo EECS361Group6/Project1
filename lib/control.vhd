@@ -8,7 +8,8 @@ entity control is
 port(
 opcode: in std_logic_vector(5 downto 0);
 func:in std_logic_vector(5 downto 0);
-regWr,regDst,jump,branch,ALUctr,extSig,ALUsrc,memWr,memToReg: out std_logic
+regWr,regDst,jump,branch,extOp,ALUsrc,memWr,memToReg: out std_logic;
+ALUctr:out  std_logic_vector(4 downto 0)
 );
 end entity control;
 
@@ -29,6 +30,9 @@ signal temp_and: std_logic_vector(1 downto 0);
 signal temp_or: std_logic_vector(1 downto 0);
 signal temp_bgtz: std_logic_vector(1 downto 0);
 signal temp_sll: std_logic_vector(1 downto 0);
+
+--signals used in summary of control signals
+signal temp_regDst, temp_regWr:std_logic_vector(1 downto 0);
 
 begin
 --now we need to create flags for every instruction
@@ -85,7 +89,27 @@ sll2: and_gate port map(temp_sll(1), temp_sll(0), sllf);
 bgtz0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), opcode(2), opcode(1), opcode(0), bgtzf);
 
 
-
-
-
+--for regDst
+regDst0: or_6 port map(addf, adduf, subf, subuf, sltf, sltuf, temp_regDst(1));
+regDst1: or_6 port map(andf, orf, sllf, '0', '0', '0', temp_regDst(0));
+regDst2: or_gate port map(temp_regDst(0), temp_regDst(1), regDst);
+--for regWr
+regWr0: or_6 port map(addf, adduf, subf, subuf, sltf, sltuf, temp_regWr(1));
+regWr1: or_6 port map(andf, orf, sllf, '0', '0', '0', temp_regWr(0));
+regWr2: or_gate port map(temp_regWr(0), temp_regWr(1), regWr);
+--for branch
+branch0: or_6 port map(beqf, bnef, bgtzf,'0','0','0', branch);
+--for extOp
+extOp0: or_6 port map(lwf, swf, addif,'0','0','0', extOp);
+--for ALUsrc
+ALUsrc0: or_6 port map(lwf, swf, addif,sllf,'0','0', ALUsrc);
+--for memWr & memToReg
+memWr <= swf;
+memToReg <= lwf;
+--ALUctr
+ALUctr0: or_6 port map(andf, sltf, sltuf,'0','0','0', ALUctr(0));
+ALUctr1: or_gate port map(orf, sltuf, ALUctr(1));
+ALUctr2: or_6 port map(subf, subuf,sltf, sltuf,beqf,bnef, ALUctr(2));
+ALUctr3: ALUctr(3) <= sllf;
+ALUctr4: ALUctr(3) <= bgtzf;
 end beh;
