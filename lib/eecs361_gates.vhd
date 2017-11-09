@@ -18,6 +18,20 @@ package eecs361_gates is
     );
   end component not_gate;
 
+component not_3
+port (
+	input:in std_logic_vector(2 downto 0);
+	output:out std_logic_vector(2 downto 0)
+);
+end component not_3;
+
+component not_6 
+port (
+	input:in std_logic_vector(5 downto 0);
+	output:out std_logic_vector(5 downto 0)
+);
+end component not_6;
+
   component not_gate_n
     generic (
       n : integer
