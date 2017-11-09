@@ -12,7 +12,7 @@ entity data_path is
 end data_path;
 
 architecture structural of data_path is
-signal zero, jump, branch, regDst, regWr, memWr, memToReg, ALUSrc, ALUctr, co, ov, extOp, extSig : std_logic;
+signal zero, jump, branch, regDst, regWr, memWr, memToReg, ALUSrc, co, ov, extOp, extSig : std_logic;
 signal ins, shamt, busA, busB, busC, extImm, busW, ALUResult : std_logic_vector(31 downto 0);
 signal imm: std_logic_vector(15 downto 0);
 signal regS, regT, regD, regW, ALUctr: std_logic_vector(4 downto 0);
