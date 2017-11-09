@@ -14,7 +14,7 @@ package eecs361 is
 		regS: out std_logic_vector(4 downto 0);
 		regT: out std_logic_vector(4 downto 0);
 		regD: out std_logic_vector(4 downto 0);
-		imm: out std_logic_vector(31 downto 0);
+		imm: out std_logic_vector(15 downto 0);
 		opcode: out std_logic_vector(5 downto 0);
 		func: out std_logic_vector(5 downto 0);
 		shamt: out std_logic_vector(31 downto 0)	
@@ -258,4 +258,75 @@ port
   );
 end component register_file;
 
+component control 
+port(
+opcode: in std_logic_vector(5 downto 0);
+func:in std_logic_vector(5 downto 0);
+regWr,regDst,jump,branch,extOp,ALUsrc,memWr,memToReg: out std_logic;
+ALUctr:out  std_logic_vector(4 downto 0)
+);
+end component control;
+
+--ALU items
+component mux_4to1
+	port(
+		op:in std_logic_vector(1 downto 0);
+		a0,a1,a2,a3:in std_logic;
+		result:out std_logic
+);
+end component mux_4to1;
+
+component alu 
+	port	(
+		op:in std_logic_vector(4 downto 0);
+		a,b:in std_logic_vector(31 downto 0);
+		co,zero,ov:out std_logic;
+		s: out std_logic_vector(31 downto 0)
+	);
+end component alu;
+
+component single_alu 
+	port(
+		a,b,ci:in std_logic;
+		op:in std_logic_vector(1 downto 0);
+		co,s:out std_logic
+);
+end component single_alu;
+
+component sltu 
+	port	(
+		a,b:in std_logic_vector(31 downto 0);
+		result:out std_logic
+	);
+end component sltu;
+
+component slt  
+	port	(
+		a,b:in std_logic_vector(31 downto 0);
+		result:out std_logic
+	);
+end component slt;
+
+component zhuanma
+	port	(
+		x:in std_logic_vector(31 downto 0);
+		z:out std_logic_vector(31 downto 0)
+	);
+end component zhuanma;
+
+component left_shifter 
+	port(
+		a: in std_logic_vector(31 downto 0);
+		s: in std_logic_vector(4 downto 0);
+		result: out std_logic_vector(31 downto 0)
+);
+end component left_shifter;
+
+component right_shifter  
+	port(
+		a: in std_logic_vector(31 downto 0);
+		s: in std_logic_vector(4 downto 0);
+		result: out std_logic_vector(31 downto 0)
+);
+end component right_shifter;
 end;

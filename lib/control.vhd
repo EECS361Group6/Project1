@@ -9,7 +9,8 @@ port(
 opcode: in std_logic_vector(5 downto 0);
 func:in std_logic_vector(5 downto 0);
 regWr,regDst,jump,branch,extOp,ALUsrc,memWr,memToReg: out std_logic;
-ALUctr:out  std_logic_vector(4 downto 0)
+ALUctr:out  std_logic_vector(4 downto 0);
+eq: out std_logic
 );
 end entity control;
 
@@ -112,4 +113,7 @@ ALUctr1: or_gate port map(orf, sltuf, ALUctr(1));
 ALUctr2: or_6 port map(subf, subuf,sltf, sltuf,beqf,bnef, ALUctr(2));
 ALUctr3: ALUctr(3) <= sllf;
 ALUctr4: ALUctr(3) <= bgtzf;
+
+--for eq
+eq <= bnef;
 end beh;
