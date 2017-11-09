@@ -13,7 +13,7 @@ end data_path;
 
 architecture structural of data_path is
 signal zero, jump, branch, regDst, regWr, memWr, memToReg, ALUSrc, co, ov, extOp, extSig, eqzero, eq, not_memWr : std_logic;
-signal ins, shamt, busA, busB, busC, extImm, busW, ALUResult : std_logic_vector(31 downto 0);
+signal ins, shamt, busA, busB, busC, memOut, extImm, busW, ALUResult : std_logic_vector(31 downto 0);
 signal imm: std_logic_vector(15 downto 0);
 signal regS, regT, regD, regW, ALUctr: std_logic_vector(4 downto 0);
 signal opcode, func: std_logic_vector(5 downto 0);
@@ -28,8 +28,8 @@ begin
 	extImm <= extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & imm(15 downto 0);
 	Alu1: alu port map(a=>busA, b=>busC, op=>ALUctr, zero=>zero, co=>co, ov=>ov, s=>ALUResult);
 	--DataMem:
-	not1: not_gate port map(memWr, not_memWr)
-	mem0: syncram generic map ("bills_branch.dat") port map (clk, '1', not_memWr, memWr, ALUResult, busB, memOut); --Data memory
+	not1: not_gate port map(memWr, not_memWr);
+	mem0: syncram generic map ("bills_branch.dat") port map (clk, '1', not_memWr, memWr, ALUResult, busB, memOut);
 	crt: control port map(opcode=>opcode, func=>func, regWr=>regWr, regDst=>regDst, jump=>jump, branch=>branch, ALUctr=> ALUctr, extOp=>extOp, ALUsrc=>ALUsrc, memWr=>memWr, memToReg=>memToReg, eq => eq);
 	eq_zero: xor_gate port map(eq, zero, eqzero);
 end structural;
