@@ -28,6 +28,5 @@ begin
 	extImm <= extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & extSig & imm(15 downto 0);
 	--Alu: ALU port map(x=>busA, y=>busC, op=>ALUcrt, zero=>zero, co=>co, ov=>ov, s=>ALUResult);
 	--DataMem:
-	--getALUctr:
 	--crt: control port map(opcode=>opcode, func=>func, regWr=>regWr, regDst=>regDst, jump=>jump, branch=>branch, ALUctr=> ALUctr, extOp=>extOp, ALUsrc=>ALUsrc, memWr=>memWr, memToReg=>memToReg);
 end structural;
