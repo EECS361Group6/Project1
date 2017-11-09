@@ -243,13 +243,6 @@ component mux_4input
   );
 end component mux_4input;
 
-component dff_32
-	port(
-		clk	: in  std_logic;
-		d	: in  std_logic_vector(31 downto 0);
-		q	: out std_logic_vector(31 downto 0)
-	);
-end component dff_32;
 
 component register_file
 port

@@ -14,7 +14,7 @@ package eecs361 is
 		regS: out std_logic_vector(4 downto 0);
 		regT: out std_logic_vector(4 downto 0);
 		regD: out std_logic_vector(4 downto 0);
-		imm: out std_logic_vector(31 downto 0);
+		imm: out std_logic_vector(15 downto 0);
 		opcode: out std_logic_vector(5 downto 0);
 		func: out std_logic_vector(5 downto 0);
 		shamt: out std_logic_vector(31 downto 0)	

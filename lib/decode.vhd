@@ -10,7 +10,7 @@ entity decode is
 		regS: out std_logic_vector(4 downto 0);
 		regT: out std_logic_vector(4 downto 0);
 		regD: out std_logic_vector(4 downto 0);
-		imm: out std_logic_vector(31 downto 0);
+		imm: out std_logic_vector(15 downto 0);
 		opcode: out std_logic_vector(5 downto 0);
 		func: out std_logic_vector(5 downto 0);
 		shamt: out std_logic_vector(31 downto 0)
@@ -22,7 +22,7 @@ begin
 	regS <= ins(20 downto 16);
 	regT <= ins(25 downto 21);
 	regD <= ins(15 downto 11);
-	imm  <= ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15)&ins(15 downto 0);
+	imm  <= ins(15 downto 0);
 	opcode <= ins(31 downto 26);
 	func <= ins(5 downto 0);
 	shamt <= "000000000000000000000000000"&ins(10 downto 6);
