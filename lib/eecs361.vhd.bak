@@ -12,7 +12,7 @@ package eecs361 is
     	clk	  : in std_logic;
 		reset : in std_logic
 	);
-	end data_path;
+	end component data_path;
 
   --decode
   component decode

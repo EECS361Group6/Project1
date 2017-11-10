@@ -271,7 +271,8 @@ opcode: in std_logic_vector(5 downto 0);
 func:in std_logic_vector(5 downto 0);
 regWr,regDst,jump,branch,extOp,ALUsrc,memWr,memToReg: out std_logic;
 ALUctr:out  std_logic_vector(4 downto 0);
-eq: out std_logic
+eq: out std_logic;
+shamt_imm: out std_logic
 );
 end component control;
 

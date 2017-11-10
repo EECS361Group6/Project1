@@ -41,7 +41,7 @@ invert_opcode: not_6 port map(opcode(5 downto 0), not_opcode(5 downto 0));
 invert_func: not_6 port map(func(5 downto 0), not_func(5 downto 0));
 
 --for addi
-addi0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), not_opcode(2), not_opcode(1), opcode(0), addif);
+addi0: and_6 port map(not_opcode(5), not_opcode(4), opcode(3), not_opcode(2), not_opcode(1), not_opcode(0), addif);
 --for add
 add0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), not_opcode(2), not_opcode(1), not_opcode(0), temp_add(1));
 add1: and_6 port map(func(5), not_func(4), not_func(3), not_func(2), not_func(1), not_func(0), temp_add(0));
@@ -96,7 +96,7 @@ regDst1: or_6 port map(andf, orf, sllf, lwf, '0', '0', temp_regDst(0));
 regDst2: or_gate port map(temp_regDst(0), temp_regDst(1), regDst);
 --for regWr
 regWr0: or_6 port map(addf, adduf, subf, subuf, sltf, sltuf, temp_regWr(1));
-regWr1: or_6 port map(andf, orf, sllf, '0', '0', '0', temp_regWr(0));
+regWr1: or_6 port map(andf, orf, sllf, addif, '0', '0', temp_regWr(0));
 regWr2: or_gate port map(temp_regWr(0), temp_regWr(1), regWr);
 --for branch
 branch0: or_6 port map(beqf, bnef, bgtzf,'0','0','0', branch);
@@ -116,4 +116,6 @@ ALUctr4: ALUctr(4) <= bgtzf;
 
 --for eq
 eq <= bnef;
+
+jump <= '0';
 end beh;
