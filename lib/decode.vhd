@@ -19,8 +19,8 @@ end decode;
 
 architecture structural of decode is
 begin
-	regS <= ins(20 downto 16);
-	regT <= ins(25 downto 21);
+	regS <= ins(25 downto 21);
+	regT <= ins(20 downto 16);
 	regD <= ins(15 downto 11);
 	imm  <= ins(15 downto 0);
 	opcode <= ins(31 downto 26);

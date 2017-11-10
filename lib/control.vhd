@@ -93,11 +93,11 @@ bgtz0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), opcode(2), op
 
 --for regDst
 regDst0: or_6 port map(addf, adduf, subf, subuf, sltf, sltuf, temp_regDst(1));
-regDst1: or_6 port map(andf, orf, sllf, lwf, '0', '0', temp_regDst(0));
+regDst1: or_6 port map(andf, orf, sllf,'0', '0', '0', temp_regDst(0));
 regDst2: or_gate port map(temp_regDst(0), temp_regDst(1), regDst);
 --for regWr
 regWr0: or_6 port map(addf, adduf, subf, subuf, sltf, sltuf, temp_regWr(1));
-regWr1: or_6 port map(andf, orf, sllf, addif, '0', '0', temp_regWr(0));
+regWr1: or_6 port map(andf, orf, sllf, addif, lwf, '0', temp_regWr(0));
 regWr2: or_gate port map(temp_regWr(0), temp_regWr(1), regWr);
 --for branch
 branch0: or_6 port map(beqf, bnef, bgtzf,'0','0','0', branch);
