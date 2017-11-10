@@ -59,7 +59,7 @@ begin
 		func <= "000000";
 		wait for 5 ns;
 		--addi
-		opcode <= "001000";
+		opcode <= "000001";
 		wait for 5 ns;
 		--beq
 		opcode <= "000100";

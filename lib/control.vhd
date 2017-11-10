@@ -41,7 +41,7 @@ invert_opcode: not_6 port map(opcode(5 downto 0), not_opcode(5 downto 0));
 invert_func: not_6 port map(func(5 downto 0), not_func(5 downto 0));
 
 --for addi
-addi0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), not_opcode(2), not_opcode(1), opcode(0), addif);
+addi0: and_6 port map(not_opcode(5), not_opcode(4), opcode(3), not_opcode(2), not_opcode(1), not_opcode(0), addif);
 --for add
 add0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), not_opcode(2), not_opcode(1), not_opcode(0), temp_add(1));
 add1: and_6 port map(func(5), not_func(4), not_func(3), not_func(2), not_func(1), not_func(0), temp_add(0));
