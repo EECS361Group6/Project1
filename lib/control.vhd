@@ -41,7 +41,7 @@ invert_opcode: not_6 port map(opcode(5 downto 0), not_opcode(5 downto 0));
 invert_func: not_6 port map(func(5 downto 0), not_func(5 downto 0));
 
 --for addi
-addi0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), not_opcode(2), not_opcode(1), not_opcode(0), addif);
+addi0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), not_opcode(2), not_opcode(1), opcode(0), addif);
 --for add
 add0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), not_opcode(2), not_opcode(1), not_opcode(0), temp_add(1));
 add1: and_6 port map(func(5), not_func(4), not_func(3), not_func(2), not_func(1), not_func(0), temp_add(0));
@@ -64,7 +64,7 @@ slt1: and_6 port map(func(5), not_func(4), func(3), not_func(2), func(1), not_fu
 slt2: and_gate port map(temp_slt(1), temp_slt(0), sltf);
 --for sltu
 sltu0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), not_opcode(2), not_opcode(1), not_opcode(0), temp_sltu(1));
-sltu1: and_6 port map(func(5), not_func(4), not_func(3), not_func(2), func(1), func(0), temp_sltu(0));
+sltu1: and_6 port map(func(5), not_func(4), func(3), not_func(2), func(1), func(0), temp_sltu(0));
 sltu2: and_gate port map(temp_sltu(1), temp_sltu(0), sltuf);
 --for beq
 beq0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), opcode(2), not_opcode(1), not_opcode(0),beqf);
@@ -92,7 +92,7 @@ bgtz0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), opcode(2), op
 
 --for regDst
 regDst0: or_6 port map(addf, adduf, subf, subuf, sltf, sltuf, temp_regDst(1));
-regDst1: or_6 port map(andf, orf, sllf, '0', '0', '0', temp_regDst(0));
+regDst1: or_6 port map(andf, orf, sllf, lwf, '0', '0', temp_regDst(0));
 regDst2: or_gate port map(temp_regDst(0), temp_regDst(1), regDst);
 --for regWr
 regWr0: or_6 port map(addf, adduf, subf, subuf, sltf, sltuf, temp_regWr(1));
@@ -101,7 +101,7 @@ regWr2: or_gate port map(temp_regWr(0), temp_regWr(1), regWr);
 --for branch
 branch0: or_6 port map(beqf, bnef, bgtzf,'0','0','0', branch);
 --for extOp
-extOp0: or_6 port map(lwf, swf, addif,'0','0','0', extOp);
+extOp0: or_6 port map(lwf,swf,addif,'0','0','0', extOp);
 --for ALUsrc
 ALUsrc0: or_6 port map(lwf, swf, addif,sllf,'0','0', ALUsrc);
 --for memWr & memToReg
@@ -112,7 +112,7 @@ ALUctr0: or_6 port map(andf, sltf, sltuf,'0','0','0', ALUctr(0));
 ALUctr1: or_gate port map(orf, sltuf, ALUctr(1));
 ALUctr2: or_6 port map(subf, subuf,sltf, sltuf,beqf,bnef, ALUctr(2));
 ALUctr3: ALUctr(3) <= sllf;
-ALUctr4: ALUctr(3) <= bgtzf;
+ALUctr4: ALUctr(4) <= bgtzf;
 
 --for eq
 eq <= bnef;
