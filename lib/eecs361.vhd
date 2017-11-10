@@ -7,6 +7,13 @@ use work.eecs361_gates.all;
 
 package eecs361 is
 
+	component data_path is
+  	port (
+    	clk	  : in std_logic;
+		reset : in std_logic
+	);
+	end component data_path;
+
   --decode
   component decode
 	port(

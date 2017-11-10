@@ -7,6 +7,13 @@ use work.eecs361_gates.all;
 
 package eecs361 is
 
+	component data_path is
+  	port (
+    	clk	  : in std_logic;
+		reset : in std_logic
+	);
+	end data_path;
+
   --decode
   component decode
 	port(
@@ -263,7 +270,8 @@ port(
 opcode: in std_logic_vector(5 downto 0);
 func:in std_logic_vector(5 downto 0);
 regWr,regDst,jump,branch,extOp,ALUsrc,memWr,memToReg: out std_logic;
-ALUctr:out  std_logic_vector(4 downto 0)
+ALUctr:out  std_logic_vector(4 downto 0);
+eq: out std_logic
 );
 end component control;
 

@@ -10,6 +10,7 @@ end instruction_test;
 architecture behavioral of instruction_test is
 signal zero, clk, jump, branch, reset : std_logic;
 signal ins: std_logic_vector(31 downto 0);
+constant clk_period :time :=20 ns;      
 begin
 	test_comp : Instruction
     port map (
@@ -35,7 +36,7 @@ begin
     	wait for 5 ns;
     	clk <='0';
     	reset <='0';
-		wait for 5ns;
+		wait for 5 ns;
     	clk <='1';
     	wait for 5 ns;
     	clk <='0';
