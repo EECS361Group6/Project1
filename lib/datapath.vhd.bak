@@ -18,11 +18,14 @@ signal imm, imm1: std_logic_vector(15 downto 0);
 signal regS, regT, regD, regW, ALUctr: std_logic_vector(4 downto 0);
 signal opcode, func: std_logic_vector(5 downto 0);
 signal reg_clk: std_logic;
+signal reg5,reg6,reg7: std_logic_vector(31 downto 0);
+signal pc: std_logic_vector(31 downto 0);
+
 begin
 	reg_clkgenerator: not_gate port map(clk, reg_clk);
-	ins1: Instruction port map(zero=>eqzero, clk=>clk, jump=>jump, branch=>branch, reset=>reset, instruction=>ins);
+	ins1: Instruction port map(zero=>eqzero, clk=>clk, jump=>jump, branch=>branch, reset=>reset, instruction=>ins, pc => pc);
 	dec: decode port map(ins=>ins, regS=>regS, regT=>regT, regD=>regD, imm=>imm, opcode=>opcode, func=>func, shamt=>shamt);
-	reg: register_file port map(outA=>busA, outB=>busB, input=>busW, writeEnable=>regWr, regASel=>regS, regBSel=>regT, writeRegSel=>regW, clock=>reg_clk);
+	reg: register_file port map(outA=>busA, outB=>busB, reg5 => reg5, reg6 => reg6, reg7 => reg7, input=>busW, writeEnable=>regWr, regASel=>regS, regBSel=>regT, writeRegSel=>regW, clock=>clk);
 	mu1: mux_n generic map(n=>5) port map(sel=>regDst, src0=>regT, src1=>regD, z=>regW);
 	mu2: mux_32 port map(sel=>ALUSrc, src0=>busB, src1=>extImm, z=>busC);
 	mu3: mux_32 port map(sel=>memToReg, src0=>ALUResult, src1=>memOut, z=>busW);
@@ -31,8 +34,9 @@ begin
 	Alu1: alu port map(a=>busA, b=>busC, op=>ALUctr, zero=>zero, co=>co, ov=>ov, s=>ALUResult);
 	--DataMem:
 	not1: not_gate port map(memWr, not_memWr);
-	mem0: syncram generic map (mem_file=>"bills_branch.dat") port map (clk => reg_clk, cs => '1', oe => not_memWr, we => memWr, addr => ALUResult, din=>busB, dout=>memOut);
+	mem0: syncram generic map (mem_file=>"sort_corrected_branch.dat") port map (clk => reg_clk, cs => '1', oe => not_memWr, we => memWr, addr => ALUResult, din=>busB, dout=>memOut);
 	crt: control port map(opcode=>opcode, func=>func, regWr=>regWr, regDst=>regDst, jump=>jump, branch=>branch, ALUctr=> ALUctr, shamt_imm => shamt_imm, extOp=>extOp, ALUsrc=>ALUsrc, memWr=>memWr, memToReg=>memToReg, eq => eq);
 	eq_zero: xor_gate port map(eq, zero, eqzero);
 	mu4: mux_n generic map(n=>16) port map (src0 => imm, src1 => shamt(15 downto 0), sel => shamt_imm, z => imm1) ;
+	
 end structural;

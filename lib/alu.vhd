@@ -21,6 +21,7 @@ architecture beh of alu is
 	signal co0,co1,candi11,candi111,candi110:std_logic;
 	signal nouse:std_logic_vector(15 downto 0);
 	signal temp_bgtz, zero_candi0, zero_candi1:std_logic;
+	signal pre_bgtz: std_logic_vector(31 downto 0);
 begin
 temp_op <= op(3 downto 2);
 
@@ -127,9 +128,10 @@ zz1: not_gate port map(x => temp_zero(30), z => zero_candi0);
 codecision: mux port map(src0 => co0, src1 => co1, sel => op(2), z => co);
 
 --bgtz
-bgtz0: not_gate port map(a(31), temp_bgtz);
+pre_bgtz0: complete_adder port map(a=> a, b => x"ffffffff",ci => '0', s => pre_bgtz);
+bgtz0: not_gate port map(pre_bgtz(31), temp_bgtz);
 bgtz1: and_gate port map(temp_bgtz, op(4), zero_candi1);
-bgtz2: or_gate port map(zero_candi0, zero_candi1, zero);
+bgtz2: mux port map(src0 => zero_candi0, src1 => zero_candi1, sel => op(4), z => zero);
 
 
 end architecture beh;

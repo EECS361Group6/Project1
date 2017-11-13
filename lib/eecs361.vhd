@@ -36,7 +36,8 @@ package eecs361 is
 		jump: in std_logic;
 		branch: in std_logic;
 		reset : in std_logic;
-		instruction: out std_logic_vector(31 downto 0)		
+		instruction: out std_logic_vector(31 downto 0);
+		pc0:out std_logic_vector(31 downto 0)		
 	);
   end component Instruction;
   -- Complete_adder
@@ -257,6 +258,7 @@ port
   outA          : out std_logic_vector(31 downto 0);
   outB          : out std_logic_vector(31 downto 0);
   input         : in  std_logic_vector(31 downto 0);
+  reg5,reg6,reg7:out std_logic_vector(31 downto 0);
   writeEnable   : in std_logic;
   regASel       : in std_logic_vector(4 downto 0);
   regBSel       : in std_logic_vector(4 downto 0);

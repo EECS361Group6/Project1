@@ -11,7 +11,8 @@ entity Instruction is
 		jump: in std_logic;
 		branch: in std_logic;
 		reset : in std_logic;
-		instruction: out std_logic_vector(31 downto 0)
+		instruction: out std_logic_vector(31 downto 0);
+		pc0:out std_logic_vector(31 downto 0)
 		
 	);
 end Instruction;
@@ -36,8 +37,9 @@ begin
 
 	ddf0: dff_32 port map(clk=> clk, d=>PC_in, q=> PC);
 	sram0: sram
-		generic map(mem_file=>"bills_branch.dat")
+		generic map(mem_file=>"sort_corrected_branch.dat")
 		port map(cs=>'1', oe=>'1', we=>'0', addr=>PC, din=>PC, dout=>ins);
 	jump_PC(31 downto 2) <= (PC(31 downto 28) & ins(25 downto 0));
 	jump_PC(1 downto 0) <= "00";
+	pc0 <= PC;
 end structural;

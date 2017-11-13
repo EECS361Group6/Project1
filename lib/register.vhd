@@ -9,6 +9,7 @@ port
 (
   outA          : out std_logic_vector(31 downto 0);
   outB          : out std_logic_vector(31 downto 0);
+  reg5,reg6,reg7: out std_logic_vector(31 downto 0);
   input         : in  std_logic_vector(31 downto 0);
   writeEnable   : in std_logic;
   regASel       : in std_logic_vector(4 downto 0);
@@ -235,4 +236,8 @@ architecture structual of register_file is
     bmux2: mux32_32 port map (out0,out1,out2,out3,out4,out5,out6,out7,out8,out9,out10,out11,out12,out13,out14,out15,out16,out17,out18,out19,out20,out21,out22,out23,out24,out25,out26,out27,out28,out29,out30,out31,regBSel,temp_outB);
     outla: and_gate_32 port map(temp_A, temp_outA, outA);
     outlb: and_gate_32 port map(temp_B, temp_outB, outB);
+
+    reg5 <= out5;
+    reg6 <= out6;
+    reg7 <= out7;
 end structual;

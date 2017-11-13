@@ -90,7 +90,6 @@ sll2: and_gate port map(temp_sll(1), temp_sll(0), sllf);
 --for bgtz
 bgtz0: and_6 port map(not_opcode(5), not_opcode(4), not_opcode(3), opcode(2), opcode(1), opcode(0), bgtzf);
 
-
 --for regDst
 regDst0: or_6 port map(addf, adduf, subf, subuf, sltf, sltuf, temp_regDst(1));
 regDst1: or_6 port map(andf, orf, sllf,'0', '0', '0', temp_regDst(0));

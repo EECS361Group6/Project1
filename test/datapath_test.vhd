@@ -9,7 +9,7 @@ end datapath_test;
 
 architecture behavioral of datapath_test is
 signal clk,reset: std_logic;
-constant clk_period :time :=10 ns;
+constant clk_period :time :=2 ns;
 begin
 	da: data_path port map(clk=>clk, reset=>reset);
 	clk_gen:process    
